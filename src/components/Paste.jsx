@@ -22,7 +22,7 @@ const Paste = () => {
   const [searchTerm, setSearchTerm] = useState(""); // State to hold the search term
   const [showShareModal, setShowShareModal] = useState(false);
   const [selectedPaste, setSelectedPaste] = useState(null);
-
+  const baseUrl=window.location.href;
   const handleShareClick = (paste) => {
     setSelectedPaste(paste);
     setShowShareModal(true);
@@ -36,6 +36,8 @@ const Paste = () => {
   const handleDelete = (id) => {
     dispatch(removeFromPastes(id));
   };
+
+  console.log("windowurl",window.location.href)
 
   // Filter pastes based on search term (by title or content)
   const filteredPastes = pastes.filter((paste) =>
@@ -142,7 +144,7 @@ const Paste = () => {
 
                           <input
                             type="text"
-                            value={`https://yourwebsite.com/pastes/${selectedPaste._id}`}
+                            value={`${baseUrl}/${selectedPaste._id}`}
                             readOnly
                             className="w-full p-2 border rounded mb-4"
                           />
@@ -150,7 +152,7 @@ const Paste = () => {
                             className="w-full p-2 bg-blue-500 text-white rounded"
                             onClick={() =>
                               handleCopyLink(
-                                `https://yourwebsite.com/pastes/${selectedPaste._id}`
+                                `${baseUrl}/${selectedPaste._id}`
                               )
                             }
                           >
@@ -159,7 +161,7 @@ const Paste = () => {
 
                           <div className="flex justify-around mt-4">
                             <a
-                              href={`https://t.me/share/url?url=https://yourwebsite.com/pastes/${selectedPaste._id}&text=Check this paste`}
+                              href={`https://t.me/share/url?url=${baseUrl}/${selectedPaste._id}&text=Check this paste`}
                               target="_blank"
                               rel="noreferrer"
                             >
@@ -171,7 +173,7 @@ const Paste = () => {
                             </a>
 
                             <a
-                              href={`https://wa.me/?text=https://yourwebsite.com/pastes/${selectedPaste._id}`}
+                              href={`https://wa.me/?text=${baseUrl}/pastes/${selectedPaste._id}`}
                               target="_blank"
                               rel="noreferrer"
                             >
@@ -183,7 +185,7 @@ const Paste = () => {
                             </a>
 
                             <a
-                              href={`https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com/pastes/${selectedPaste._id}`}
+                              href={`https://www.facebook.com/sharer/sharer.php?u=${baseUrl}/pastes/${selectedPaste._id}`}
                               target="_blank"
                               rel="noreferrer"
                             >
